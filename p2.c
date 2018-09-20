@@ -24,21 +24,28 @@ long int expo(int pot, int expo){
   return result;
 }
 
+long int convbd(char bits[256], int cont){
+  int i = 0, aux = 0;
+  long int result = 0;
+  for(; cont > 0; cont--){
+    if(bits[cont - 1] == '0')
+      aux = 0;
+    else if (bits[cont - 1] == '1')
+      aux = 1;
+    result =  result + (aux * expo(2, i));
+    i++;
+  }
+  return result;
+}
+
 void bindec(){
-  int i, j = 0, aux = 0;
+  int cont = 0;
   char bits[256];
   long int dec = 0;
   printf("Digite o numero que deseja converter: ");
   scanf("%s", bits); getchar();
-  for(i = 0; bits[i] != '\0'; i++);
-  for(; i > 0; i--){
-    if(bits[i - 1] == '0')
-      aux = 0;
-    else if (bits[i - 1] == '1')
-      aux = 1;
-    dec =  dec + (aux * expo(2, j));
-    j++;
-  }
+  for(cont = 0; bits[cont] != '\0'; cont++);
+  dec = convbd(bits, cont);
   printf("%li\n", dec);
 }
 
