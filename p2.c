@@ -43,6 +43,7 @@ void convDH(long int dec, char hex[64]){
   long int aux;
   for(i = 0; res > 0; i++)
     res = res / 16;
+  hex[i] = '\0';
   i--;
   for(; dec > 0; i--){
     aux = (dec % 16);
@@ -139,22 +140,40 @@ void hexBin(){
   printf("%s\n", bits);
 }
 
+void decBin(){
+  int dec = 0;
+  char bits[256];
+  printf("Digite o numero que deseja converter: ");
+  scanf("%d", &dec);
+  convDB(dec, bits);
+  printf("%s\n", bits);
+}
+
+void decHex(){
+  int dec = 0;
+  char hex[64];
+  printf("Digite o numero que deseja converter: ");
+  scanf("%d", &dec);
+  convDH(dec, hex);
+  printf("%s\n", hex);
+}
+
 int main(){
   int opcao = 0;
   opcao = menu(opcao);
   switch(opcao){
     case 1:
       binDec();
-      return 0;
     case 2:
       binHex();
-      return 0;
     case 3:
       hexDec();
-      return 0;
     case 4:
       hexBin();
-      return 0;
+    case 5:
+      decBin();
+    case 6:
+      decHex();
   }
   return 0;
 }
