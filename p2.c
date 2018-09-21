@@ -41,9 +41,10 @@ long int convBD(char bits[256], int cont){
 void convDH(long int dec, char hex[64]){
   int i, res = dec;
   long int aux;
-  for(i = 0; res > 16; i++)
+  for(i = 0; res > 0; i++)
     res = res / 16;
-  for(; dec > 15; i--){
+  i--;
+  for(; dec > 0; i--){
     aux = (dec % 16);
     dec = dec / 16;
     if(aux > 9){
@@ -53,13 +54,45 @@ void convDH(long int dec, char hex[64]){
     else
       hex[i] = aux + 48;
   }
-  aux = (dec % 16);
-  if(aux > 9){
-    aux =  70 - (15 - aux);
-    hex[i] = aux;
+}
+
+int convHD(char hex[64], int i){
+  int result = 0, j = 0, auxDec = 0;
+  char aux;
+  for(; i > 0; i--){
+    aux = hex[i-1];
+    if(hex[i-1] < 57)
+      auxDec = hex[i-1] - 48;
+    else if(hex[i-1] == 'A' || hex[i-1] == 'a')
+      auxDec = 10;
+      else if(hex[i-1] == 'B' || hex[i-1] == 'b')
+        auxDec = 11;
+        else if(hex[i-1] == 'C' || hex[i-1] == 'c')
+          auxDec = 12;
+          else if(hex[i-1] == 'D' || hex[i-1] == 'd')
+            auxDec = 13;
+            else if(hex[i-1] == 'E' || hex[i-1] == 'e')
+              auxDec = 14;
+              else if(hex[i-1] == 'F' || hex[i-1] == 'f')
+                auxDec = 15;
+    result += (auxDec * (expo(16, j)));
+    j++;
   }
-  else
-    hex[i] = aux + 48;
+  return result;
+}
+
+void convDB(int dec, char bits[256]){
+  int cont, i = 0, aux = 0, decAux = dec;
+  for(cont = 0; decAux > 0; cont++){
+    decAux = decAux / 2;
+  }
+  bits[cont] = '\0';
+  cont--;
+  for(cont; dec > 0; cont--){
+    aux = dec % 2;
+    dec = dec / 2;
+    bits[cont] = aux + 48;
+  }
 }
 
 void binDec(){
@@ -86,31 +119,24 @@ void binHex(){
 }
 
 void hexDec(){
-  int i, auxDec = 0, result = 0, j = 0;
-  char hex[64], aux;
+  int i, result = 0;
+  char hex[64];
   printf("Digite o numero que deseja converter: ");
   scanf("%s", hex); getchar();
   for(i = 0; hex[i] != '\0'; i++);
-  for(; i > 0; i--){
-    aux = hex[i-1];
-    if(hex[i-1] < 57)
-      auxDec = hex[i-1] - 48;
-    else if(hex[i-1] == 'A' || hex[i-1] == 'a')
-      auxDec = 10;
-      else if(hex[i-1] == 'B' || hex[i-1] == 'b')
-        auxDec = 11;
-        else if(hex[i-1] == 'C' || hex[i-1] == 'c')
-          auxDec = 12;
-          else if(hex[i-1] == 'D' || hex[i-1] == 'd')
-            auxDec = 13;
-            else if(hex[i-1] == 'E' || hex[i-1] == 'e')
-              auxDec = 14;
-              else if(hex[i-1] == 'F' || hex[i-1] == 'f')
-                auxDec = 15;
-    result += (auxDec * (expo(16, j)));
-    j++;
-  }
+  result = convHD(hex, i);
   printf("%d\n", result);
+}
+
+void hexBin(){
+  int dec = 0, cont;
+  char hex[64], bits[256];
+  printf("Digite o numero que deseja converter: ");
+  scanf("%s", hex); getchar();
+  for(cont = 0; hex[cont] != '\0'; cont++);
+  dec = convHD(hex, cont);
+  convDB(dec, bits);
+  printf("%s\n", bits);
 }
 
 int main(){
@@ -125,6 +151,10 @@ int main(){
       return 0;
     case 3:
       hexDec();
+      return 0;
+    case 4:
+      hexBin();
+      return 0;
   }
   return 0;
 }
