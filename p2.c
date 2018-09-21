@@ -24,7 +24,7 @@ long int expo(int pot, int expo){
   return result;
 }
 
-long int convbd(char bits[256], int cont){
+long int convBD(char bits[256], int cont){
   int i = 0, aux = 0;
   long int result = 0;
   for(; cont > 0; cont--){
@@ -38,29 +38,52 @@ long int convbd(char bits[256], int cont){
   return result;
 }
 
-void bindec(){
+void convDH(long int dec, char hex[64]){
+  int i, res = dec;
+  long int aux;
+  for(i = 0; res > 16; i++)
+    res = res / 16;
+  for(; dec > 15; i--){
+    aux = (dec % 16);
+    dec = dec / 16;
+    if(aux > 9){
+      aux =  70 - (15 - aux);
+      hex[i] = aux;
+    }
+    else
+      hex[i] = aux + 48;
+  }
+  aux = (dec % 16);
+  if(aux > 9){
+    aux =  70 - (15 - aux);
+    hex[i] = aux;
+  }
+  else
+    hex[i] = aux + 48;
+
+}
+
+void binDec(){
   int cont = 0;
   char bits[256];
   long int dec = 0;
   printf("Digite o numero que deseja converter: ");
   scanf("%s", bits); getchar();
   for(cont = 0; bits[cont] != '\0'; cont++);
-  dec = convbd(bits, cont);
+  dec = convBD(bits, cont);
   printf("%li\n", dec);
 }
 
-void hexdec(){
-  int i, j = 0;
-  char bits[256], bits2[256], hex[100];
+void binHex(){
+  int i, cont;
+  char bits[256], hex[64];
+  long int dec = 0;
   printf("Digite o numero que deseja converter: ");
   scanf("%s", bits); getchar();
-  for(i = 0; bits[i] != '\0'; i++)
-    for(i = 0; i < 3; i++){
-      bits2[j] = bits[j];
-      j++;
-    }
-    bits2[j] = '\0';
-
+  for(cont = 0; bits[cont] != '\0'; cont++);
+  dec = convBD(bits, cont);
+  convDH(dec, hex);
+  printf("%s\n", hex);
 }
 
 int main(){
@@ -68,10 +91,10 @@ int main(){
   opcao = menu(opcao);
   switch(opcao){
     case 1:
-      bindec();
+      binDec();
       return 0;
     case 2:
-      hexdec();
+      binHex();
       return 0;
   }
   return 0;
