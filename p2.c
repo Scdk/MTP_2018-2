@@ -60,7 +60,6 @@ void convDH(long int dec, char hex[64]){
   }
   else
     hex[i] = aux + 48;
-
 }
 
 void binDec(){
@@ -86,6 +85,34 @@ void binHex(){
   printf("%s\n", hex);
 }
 
+void hexDec(){
+  int i, auxDec = 0, result = 0, j = 0;
+  char hex[64], aux;
+  printf("Digite o numero que deseja converter: ");
+  scanf("%s", hex); getchar();
+  for(i = 0; hex[i] != '\0'; i++);
+  for(; i > 0; i--){
+    aux = hex[i-1];
+    if(hex[i-1] < 57)
+      auxDec = hex[i-1] - 48;
+    else if(hex[i-1] == 'A' || hex[i-1] == 'a')
+      auxDec = 10;
+      else if(hex[i-1] == 'B' || hex[i-1] == 'b')
+        auxDec = 11;
+        else if(hex[i-1] == 'C' || hex[i-1] == 'c')
+          auxDec = 12;
+          else if(hex[i-1] == 'D' || hex[i-1] == 'd')
+            auxDec = 13;
+            else if(hex[i-1] == 'E' || hex[i-1] == 'e')
+              auxDec = 14;
+              else if(hex[i-1] == 'F' || hex[i-1] == 'f')
+                auxDec = 15;
+    result += (auxDec * (expo(16, j)));
+    j++;
+  }
+  printf("%d\n", result);
+}
+
 int main(){
   int opcao = 0;
   opcao = menu(opcao);
@@ -96,6 +123,8 @@ int main(){
     case 2:
       binHex();
       return 0;
+    case 3:
+      hexDec();
   }
   return 0;
 }
