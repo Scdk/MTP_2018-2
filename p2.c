@@ -57,6 +57,20 @@ void convDH(long int dec, char hex[64]){
   }
 }
 
+void convDO(long int dec, char oct[85]){
+  int i, res = dec;
+  long int aux;
+  for(i = 0; res > 0; i++)
+    res = res / 8;
+  oct[i] = '\0';
+  i--;
+  for(; dec > 0; i--){
+    aux = (dec % 8);
+    dec = dec / 8;
+    oct[i] = aux + 48;
+  }
+}
+
 int convHD(char hex[64], int i){
   int result = 0, j = 0, auxDec = 0;
   char aux;
@@ -158,22 +172,59 @@ void decHex(){
   printf("%s\n", hex);
 }
 
+void octDec(){
+  int cont, i;
+  long int dec = 0, octAux = 0;
+  char oct[85];
+  printf("Digite o numero que deseja converter: ");
+  scanf("%s", oct); getchar();
+  for(cont = 0; oct[cont] != '\0'; cont++);
+  oct[cont] = '\0';
+  for(i = 0; cont > 0; i++){
+    octAux = (oct[cont-1] - 48);
+    dec = dec + (octAux * (expo(8, i)));
+    cont--;
+  }
+  printf("%ld\n", dec);
+}
+
+void decOct(){
+  char oct[85];
+  int dec = 0;
+  printf("Digite o numero que deseja converter: ");
+  scanf("%d", &dec);
+  convDO(dec, oct);
+  printf("%s\n", oct);
+}
+
 int main(){
   int opcao = 0;
   opcao = menu(opcao);
   switch(opcao){
     case 1:
       binDec();
+      return 0;
     case 2:
       binHex();
+      return 0;
     case 3:
       hexDec();
+      return 0;
     case 4:
       hexBin();
+      return 0;
     case 5:
       decBin();
+      return 0;
     case 6:
       decHex();
+      return 0;
+    case 7:
+      octDec();
+      return 0;
+    case 8:
+      decOct();
+      return 0;
   }
   return 0;
 }
