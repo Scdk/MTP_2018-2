@@ -1,3 +1,6 @@
+/* P3.c */
+/* Lucas Resende Carneiro */
+/* 11811ECP009 */
 #include <stdio.h>
 
 long int expo(int pot, int expo){
