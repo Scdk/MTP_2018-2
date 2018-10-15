@@ -6,3 +6,5 @@ p0 - Demonstração da compilação por cmd/terminal.
 p1 - Automato finito.
 
 p2 - Conversor de bases númericas.
+
+p3 - Conversor de strings em números inteiros(atoi).
