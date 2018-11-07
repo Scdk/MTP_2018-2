@@ -8,3 +8,7 @@ p1 - Automato finito.
 p2 - Conversor de bases númericas.
 
 p3 - Conversor de strings em números inteiros(atoi).
+
+p4 - Recursão.
+
+p5 - Somatório e produtório de números aleatórios.
