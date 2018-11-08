@@ -4,22 +4,22 @@
 
 #include <stdio.h>
 
-float soma(float m[50], int n, float result){
+float soma(float m[], int n, float result){
   if(n < 0)
     return result;
-  else
+  else{
     result += m[n];
-    soma(m, n-1, result);
+    return soma(m, n-1, result);
+ }
 }
 
-float produto(float m[50], int n, float result){
-  if(result == 0)
-    result++;
+float produto(float m[], int n, float result){
   if(n < 0)
     return result;
-  else
+  else{
     result *= m[n];
-    produto(m, n-1, result);
+    return produto(m, n-1, result);
+ }
 }
 
 typedef
@@ -66,6 +66,6 @@ int main(){
     printf("%f\n", soma(vetor, 49, result));
   }
   else
-    printf("%f\n", produto(vetor, 49, result));
+    printf("%f\n", produto(vetor, 49, result+1));
   return 0;
 }
