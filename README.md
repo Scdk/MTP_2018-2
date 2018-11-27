@@ -12,3 +12,5 @@
 * p4 - Recursão.
 
 * p5 - Somatório e produtório de números aleatórios.
+
+* p6 - Gerador de tons de cinza
