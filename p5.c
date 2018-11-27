@@ -12,11 +12,11 @@ typedef
   LCG;
 
 float somatorio(float *vet_ini, int vet_tamanho, float resultado){
-	return(vet_tamanho < 0)? resultado : somatorio(vet_ini, vet_tamanho - 1, vet_ini[vet_tamanho] + resultado);
+  return(vet_tamanho < 0)? resultado : somatorio(vet_ini, vet_tamanho - 1, vet_ini[vet_tamanho] + resultado);
 }
 
 float produtorio(float *vet_ini, int vet_tamanho, float resultado){
-	return(vet_tamanho < 0)? resultado : produtorio(vet_ini, vet_tamanho - 1, vet_ini[vet_tamanho] * resultado);
+  return(vet_tamanho < 0)? resultado : produtorio(vet_ini, vet_tamanho - 1, vet_ini[vet_tamanho] * resultado);
 }
 
 void semente(LCG * r, Bytes8 seed){
@@ -45,18 +45,18 @@ void gera_numeros(float * vetor, int tam, float min, float max, LCG * r){
 }
 
 int main(){
-	float vetor[50], resultado = 0, *vet;
+  float vetor[50], resultado = 0, *vet;
   int escolha = 0, vet_tamanho = sizeof(vetor)/sizeof(float) - 1;
   LCG random;
   semente(&random, 123456);
   gera_numeros(vetor, 50, 0.5, 1.5, &random);
-	printf("Digite 1 para somatorio e 2 para produtorio: ");
-	scanf("%d", &escolha);
-	if(escolha == 1)
-		printf("%f\n", somatorio(vetor, vet_tamanho, 0));
-	else if(escolha == 2)
-		printf("%f\n", produtorio(vetor, vet_tamanho, 1));
-			else
-				printf("Escolha uma opcao valida");
-	return 0;
+  printf("Digite 1 para somatorio e 2 para produtorio: ");
+  scanf("%d", &escolha);
+  if(escolha == 1)
+    printf("%f\n", somatorio(vetor, vet_tamanho, 0));
+  else if(escolha == 2)
+    printf("%f\n", produtorio(vetor, vet_tamanho, 1));
+      else
+        printf("Escolha uma opcao valida");
+  return 0;
 }
