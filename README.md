@@ -13,6 +13,6 @@
 
 * p5 - Somatório e produtório de números aleatórios.
 
-* p6 - Gerador de tons de cinza.
+* p6 - Gerador de pontos que cortam uma circunferência .
 
-* p7 - Gerador de tons de cinza usando arquivo em binário.
+* p7 - Gerador de pontos que cortam uma circunferência usando arquivo em binário.
